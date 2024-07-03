@@ -18,3 +18,4 @@ Feature: creates a invoice
     When I send POST request
     Then verify status code is 201
     And verify I have "invoice_title" with "Lagman Invoice" in response body
+

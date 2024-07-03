@@ -12,7 +12,7 @@ import org.testng.Assert;
 import static org.hamcrest.Matchers.equalTo;
 
 public class ProductSteps {
-
+    String id;
     RequestSpecification request;
     Response response;
     String token = "eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJleHAiOjE3MTg1NDgzMTIsImlhdCI6MTcxNTk1NjMxMiwidXNlcm5hbWUiOiJxYXRlc3RlckBnbWFpbC5jb20ifQ.qEWtEi2XEK6GGxnMWZ3i98MiPrsfco9buqRe2sNVeHOAGVsbULtwfA39DogwEuPKP7jXIJtwaBBFd8kD6FwXiA";
@@ -46,6 +46,17 @@ public class ProductSteps {
         System.out.println(requestBody.toString());
 
         response = request.body(requestBody.toString()).post();
+    }
+
+    @When("I have retrieve id for {string}")
+    public void i_have_retrieve_id_for(String string) {
+        this.id = response.jsonPath().getString(id);
+        throw new io.cucumber.java.PendingException();
+    }
+    @When("I send PUT request")
+    public void i_send_put_request() {
+
+        throw new io.cucumber.java.PendingException();
     }
 
     @Then("verify status code is {int}")

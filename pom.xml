@@ -9,8 +9,8 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <maven.compiler.source>21</maven.compiler.source>
-        <maven.compiler.target>21</maven.compiler.target>
+        <maven.compiler.source>17</maven.compiler.source>
+        <maven.compiler.target>17</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
@@ -72,7 +72,49 @@
             <artifactId>cucumber-testng</artifactId>
             <version>7.18.0</version>
         </dependency>
-
+        <dependency>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>5.4.0</version>
+        </dependency>
     </dependencies>
-
+<build>
+    <plugins>
+        <plugin>
+            <groupId>net.masterthought</groupId>
+            <artifactId>maven-cucumber-reporting</artifactId>
+            <version>5.4.0</version>
+            <executions>
+                <execution>
+                    <id>generate-cucumber-report</id>
+                    <phase>verify</phase>
+                    <goals>
+                        <goal>generate</goal>
+                    </goals>
+                    <configuration>
+                        <projectName>CashwiseAPIAutomation</projectName>
+                        <outputDirectory>${project.build.directory}/cucumberReports</outputDirectory>
+                        <inputDirectory>${project.build.directory}</inputDirectory>
+                        <jsonFiles>
+                            <param>**/cucumber.json</param>
+                        </jsonFiles>
+                    </configuration>
+                </execution>
+            </executions>
+        </plugin>
+        <plugin>
+            <groupId>org.apache.maven.plugins</groupId>
+            <artifactId>maven-surefire-plugin</artifactId>
+            <version>3.3.0</version>
+            <configuration>
+                <includes>
+                    <include>**/*Steps.java</include>
+                    <include>**/*Tests.java</include>
+                    <include>**/*Test.java</include>
+                    <include>**/CucumberRunner.java</include>
+                </includes>
+            </configuration>
+        </plugin>
+    </plugins>
+</build>
 </project>
